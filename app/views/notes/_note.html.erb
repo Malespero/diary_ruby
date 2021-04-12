@@ -1,0 +1,14 @@
+<div class="box">
+  <article class="media">
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <%= note.text %>
+        </p>
+      </div>
+    </div>
+     <!--> TODO: notes edit buttons <-->
+      <%= link_to 'Delete', [note.diary, note], method: :delete, class: "button is-danger", data: { confirm: 'Are you sure?' } %>
+  </article>
+
+</div>
