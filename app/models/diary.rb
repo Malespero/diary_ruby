@@ -3,9 +3,9 @@ class Diary < ApplicationRecord
   enum kind: [:pub, :priv]
 
   validates :kind, presence: true
-  validates :expiration, presence: false, if: :isPublic?
+  validates :expiration, absence: true, if: :is_public
 
-  def isPublic?
+  def is_public
     kind == "pub"
   end
 
