@@ -2,10 +2,11 @@ class Diary < ApplicationRecord
   has_many :notes
   enum kind: [:pub, :priv]
 
-  validates :expiration, presence: true, if: :isPrivate?
+  validates :kind, presence: true
+  validates :expiration, presence: false, if: :isPublic?
 
-  def isPrivate?
-    kind == "priv"
+  def isPublic?
+    kind == "pub"
   end
 
 end
