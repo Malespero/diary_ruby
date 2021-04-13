@@ -1,37 +1,33 @@
 class NotesController < ApplicationController
     
     def create
-        @diary = Diary.find(params[:diary_id])
-        @note = @diary.notes.create(params[:note].permit(:text))
-        redirect_to diary_path(@diary)
+        diary = Diary.find(params[:diary_id])
+        note = diary.notes.create(params[:note].permit(:text))
+        render json: {status: 'SUCCESS', message: 'Note added', data: note}, status: :ok
 
     end
 
     def destroy
-		@diary = Diary.find(params[:diary_id])
-		@note = @diary.notes.find(params[:id])
-		@note.destroy
-		redirect_to diary_path(@diary)
+		diary = Diary.find(params[:diary_id])
+		note = diary.notes.find(params[:id])
+		note.destroy
+		render json: {status: 'SUCCESS', message: 'Note deleted', data: note}, status: :ok
     end
     
     def update
-        @diary = Diary.find(params[:diary_id])
-        @note = @diary.notes.find(params[:id])
+        diary = Diary.find(params[:diary_id])
+        note = diary.notes.find(params[:id])
 
-        if @note.update(params[:note].permit(:text))
-            redirect_to diary_path(@diary)
+        if diary.notes.update(params[:note].permit(:text))
+            render json: {status: 'SUCCESS', message: 'Updated note', data: note}, status: :ok
         else
-            render 'edit'
+            render json: {status: 'ERROR', message: 'Note not updated', data: note}, status: :unprocessable_entity
         end
-    end
-    
-    def edit
-        @diary = Diary.find(params[:diary_id])
-		@note = @diary.notes.find(params[:id])
     end
 
     def show
-        @diary = Diary.find(params[:diary_id])
-		@note = @diary.notes.find(params[:id])
+        diary = Diary.find(params[:diary_id])
+        note = diary.notes.find(params[:id])
+        render json: {status: 'SUCCESS', message: 'Loaded note', data: note}, status: :ok
     end
 end
