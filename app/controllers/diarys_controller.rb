@@ -36,7 +36,7 @@ class DiarysController < ApplicationController
         end
     end
 
-    # OldDeleterWorker.perform_async
+    OldDeleterWorker.perform_async(who, message)
     
     private
 

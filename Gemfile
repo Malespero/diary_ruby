@@ -28,6 +28,12 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 #Simple, efficient background processing for Ruby.
 gem 'sidekiq', '~> 6.2', '>= 6.2.1'
+#Light weight job scheduling extension for Sidekiq that adds support for queueing jobs in a recurring way.
+gem 'sidekiq-scheduler', '~> 3.0', '>= 3.0.1'
+#Prevents simultaneous Sidekiq jobs with the same unique arguments to run. Highly configurable to suite your specific needs.
+gem 'sidekiq-unique-jobs', '~> 7.0', '>= 7.0.7'
+#Sinatra is a DSL for quickly creating web applications in Ruby with minimal effort
+gem 'sinatra', '~> 2.1'
 
 
 

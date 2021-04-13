@@ -15,25 +15,22 @@ services:
     command: redis-server
     ports:
       - '6379:6379'
-    volumes:
-      - './tmp/redis:/data'
 
   sidekiq:
     depends_on:
-      - 'db'
       - 'redis'
     build: .
     command: bundle exec sidekiq
     volumes:
       - '.:/project'
       - '/project/tmp' # don't mount tmp directory
-    environment:
-      - REDIS_URL_SIDEKIQ=redis://redis:6379/12
+    env_file:
+    - .env
   
   web:
     depends_on:
       - 'db'
-      - 'redis'
+      - 'sidekiq'
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
