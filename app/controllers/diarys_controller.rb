@@ -35,8 +35,6 @@ class DiarysController < ApplicationController
             render json: {status: 'ERROR', message: 'Diary not updated', data: diary}, status: :unprocessable_entity
         end
     end
-
-    OldDeleterWorker.perform_async(who, message)
     
     private
 
