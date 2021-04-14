@@ -1,4 +1,5 @@
 class Diary < ApplicationRecord
+  scope :old, -> { where("expiration < ?", Time.now) }
   has_many :notes
   enum kind: [:pub, :priv]
 

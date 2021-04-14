@@ -1,0 +1,4 @@
+:schedule:
+  old_deleter_worker:
+    every: 10m
+    class: OldDeleterWorker
