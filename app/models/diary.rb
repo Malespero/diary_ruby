@@ -4,6 +4,7 @@ class Diary < ApplicationRecord
   enum kind: [:pub, :priv]
 
   validates :kind, presence: true
+  validates :title, presence: true
   validates :expiration, absence: true, if: :is_public
 
   def is_public
