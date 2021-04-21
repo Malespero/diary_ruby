@@ -1,14 +1,17 @@
+# frozen_string_literal: true
+
+# Diary model
 class Diary < ApplicationRecord
-  scope :old, -> { where("expiration < ?", Time.now) }
+  # scope for worker to delete old diarys
+  scope :old, -> { where('expiration < ?', Time.now) }
   has_many :notes
-  enum kind: [:pub, :priv]
+  enum kind: %i[pub priv]
 
   validates :kind, presence: true
   validates :title, presence: true
-  validates :expiration, absence: true, if: :is_public
+  validates :expiration, absence: true, if: :public?
 
-  def is_public
-    kind == "pub"
+  def public?
+    kind == 'pub'
   end
-
 end
